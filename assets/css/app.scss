@@ -1,0 +1,11 @@
+$theme-colors: (
+        "light": #F7FB8C,
+        "dark": #4B4B4B,
+        "yellow": #FFF71C
+);
+
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  background-color: #F7FB8C;
+}
