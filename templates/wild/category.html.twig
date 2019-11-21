@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% block title %}{{ categoryName }}{% endblock %}
+    {% for movie in movies %}
+        <div class="media">
+{#            <img class="align-self-start mr-3" src="{{movie.poster}}" alt="{{ movie.title }} poster">#}
+            <div class="media-body">
+                <h1 class="mt-0">{{ movie.id }} - {{ movie.title }}</h1>
+                <p>{{ movie.summary }}</p>
+{#                <p>Categorie : {{ movie.category.name }}</p>#}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
