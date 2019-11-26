@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +23,20 @@ class Category
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Program", mappedBy="category")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $programs;
+    /**
+     * @var ArrayCollection
+     */
+
+    public function __construct()
+    {
+        $this->programs = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +51,50 @@ class Category
     {
         $this->name = $name;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection|Program[]
+     */
+    public function getPrograms(): Program
+    {
+        return $this->programs;
+    }
+
+    public function setPrograms(?Program $program): self
+    {
+        $this->programs = $program;
+
+        return $this;
+    }
+
+    /**
+     * @param Program $program
+     * @return Category
+     */
+    public function addProgram(Program $program): self
+    {
+        if (!$this->programs->contains($program)) {
+            $this->programs[] = $program;
+            $program->setCategory($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Program $program
+     * @return Category
+     */
+    public function removeProgram(Program $program): self
+    {
+        if ($this->program>contains($program)) {
+            $this->programs->removeElement($program);
+            // set the owning side to null (unless already changed)
+            if ($program->getCategory() === $this) {
+                $program->setCategory(null);
+            }
+        }
         return $this;
     }
 }

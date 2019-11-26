@@ -15,13 +15,24 @@
     <a href="{{ path('app_index') }}">
         Retour à l'accueil
     </a>
-
-    {# templates/index.html.twig #}
+    <br/>
     <a href="{{ path('show', { 'slug': "walking-dead" }) }}">
-        Testing show() method from WildController with a real program s slug.
+        Testing show() method
+    </a>
+    <br/>
+    <a href="{{ path('category') }}">
+        Testing showByCategory()
+    </a>
+    <br/>
+    <a href="{{ path('program', { 'program': "walking-dead" }) }}">
+        Testing showByProgram()
+    </a>
+    <br>
+    <a href="{{ path('id') }}">
+        Testing showBySeason()
     </a>
     <br>
     <a href="{{ path('wild_index') }}">
-        Testing index() method from WildController to view all programs.
+        Testing index()
     </a>
 {% endblock %}

@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\EpisodeRepository")
  */
-class Program
+class Episode
 {
     /**
      * @ORM\Id()
@@ -24,23 +24,18 @@ class Program
     private $title;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $number;
+
+    /**
      * @ORM\Column(type="text")
      */
-    private $summary;
+    private $synopsis;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $poster;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="programs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Season", inversedBy="episode")
      * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Season", mappedBy="programs")
      */
     private $season;
 
@@ -66,38 +61,26 @@ class Program
         return $this;
     }
 
-    public function getSummary(): ?string
+    public function getNumber(): ?int
     {
-        return $this->summary;
+        return $this->number;
     }
 
-    public function setSummary(string $summary): self
+    public function setNumber(int $number): self
     {
-        $this->summary = $summary;
+        $this->number = $number;
 
         return $this;
     }
 
-    public function getPoster(): ?string
+    public function getSynopsis(): ?string
     {
-        return $this->poster;
+        return $this->synopsis;
     }
 
-    public function setPoster(?string $poster): self
+    public function setSynopsis(string $synopsis): self
     {
-        $this->poster = $poster;
-
-        return $this;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
+        $this->synopsis = $synopsis;
 
         return $this;
     }
@@ -105,7 +88,7 @@ class Program
     /**
      * @return Collection|Season[]
      */
-    public function getSeason(): Collection
+    public function getSeason(): Season
     {
         return $this->season;
     }
@@ -114,7 +97,7 @@ class Program
     {
         if (!$this->season->contains($season)) {
             $this->season[] = $season;
-            $season->setPrograms($this);
+            $season->setEpisode($this);
         }
 
         return $this;
@@ -125,10 +108,17 @@ class Program
         if ($this->season->contains($season)) {
             $this->season->removeElement($season);
             // set the owning side to null (unless already changed)
-            if ($season->getPrograms() === $this) {
-                $season->setPrograms(null);
+            if ($season->getEpisode() === $this) {
+                $season->setEpisode(null);
             }
         }
+
+        return $this;
+    }
+
+    public function setSeason(?Season $season): self
+    {
+        $this->season = $season;
 
         return $this;
     }

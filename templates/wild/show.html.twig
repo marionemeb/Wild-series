@@ -13,8 +13,20 @@
         </div>
     </div>
 
-    <a href="{{ path('wild_index') }}">
+    <a href="{{ path('app_index') }}">
         Retour à l'accueil
+    </a>
+    <br/>
+    <a href="{{ path('show', { 'slug': "walking-dead" }) }}">
+        Testing show() method
+    </a>
+    <br/>
+    <a href="{{ path('program', { 'program': "walking-dead" }) }}">
+        Testing showByProgram()
+    </a>
+    <br>
+    <a href="{{ path('wild_index') }}">
+        Testing index()
     </a>
 
 {% endblock %}

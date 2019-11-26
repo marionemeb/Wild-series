@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Saison {{ app.request.get('id') }} de {{ program.title }} {% endblock %}
+
+{% block body %}
+    <h1>Saison {{ app.request.get('id') }} de {{ program.title }}</h1>
+    <p>{{ program.summary }}</p>
+    <ul> Liste des épisodes :
+        {% for episode in episodes %}
+            <li>Episode {{ episode.number }} : {{ episode.title }} </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('wild_index') }}">
+        Retour à l'accueil
+    </a>
+{% endblock %}
