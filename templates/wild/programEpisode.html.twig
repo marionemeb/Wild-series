@@ -7,7 +7,7 @@
     <p>{{ program.summary }}</p>
     <ul> Liste des épisodes :
         {% for episode in episodes %}
-            <li>Episode {{ episode.number }} : {{ episode.title }} </li>
+            <a href="{{ path('episode', {id : episode.id }) }}"><li>Episode {{ episode.number }} : {{ episode.title }} </li></a>
         {% endfor %}
     </ul>
 
