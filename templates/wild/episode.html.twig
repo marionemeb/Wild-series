@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ program.title }} {% endblock %}
+
+{% block body %}
+    <a href="{{ path('show', { 'slug': "walking-dead" }) }}"><h1>{{ program.title }}</h1></a>
+    <p>{{ program.summary }}</p>
+    <a href="{{ path('id') }}"><h3>Saison {{ season.id }}</h3></a>
+    <h2>Episode {{ episode.number }} : {{ episode.title }}</h2>
+    <p>{{ episode.synopsis }}</p>
+
+{% endblock %}
