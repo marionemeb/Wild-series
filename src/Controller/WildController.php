@@ -7,6 +7,7 @@ use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Category;
 use App\Entity\Season;
+use App\Form\CategoryType;
 use App\Form\ProgramSearchType;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,9 +19,10 @@ Class WildController extends AbstractController
 {
     /**
      * @Route("/", name="home")
+     * @param Request $request
      * @return Response A response instance
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $programs = $this->getDoctrine()
             ->getRepository(Program::class)
@@ -32,13 +34,25 @@ Class WildController extends AbstractController
             );
         }
 
-        $form = $this->createForm(ProgramSearchType::class, null,
-            ['method' => Request::METHOD_GET]);
+        $form = $this->createForm(ProgramSearchType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $data = $form->getData();
 
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($data);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('task_success');
+        }
+
+        $category = new Category();
+        $form2 = $this->createForm(CategoryType::class, $category);
 
         return $this->render('home.html.twig', [
             'programs' => $programs,
             'form' => $form->createView(),
+            'form2' => $form2->createView(),
         ]);
     }
 
@@ -166,7 +180,7 @@ Class WildController extends AbstractController
             ->getRepository(Season::class)
             ->findBy(['program' => $titleId]);
 
-        return $this->render('wild/program.html.twig', [
+        return $this->render('wild/season.html.twig', [
             'title' => $title,
             'season' => $season,
         ]);

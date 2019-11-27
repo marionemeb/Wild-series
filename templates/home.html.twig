@@ -10,6 +10,10 @@
 
     <button type="submit" name="btnSearch">Rechercher</button>
 
+    {{ form_row(form2.name) }}
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+
     {{ form_end(form) }}
 
 {% endblock %}
