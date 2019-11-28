@@ -18,45 +18,21 @@ class CategoryController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function category(Request $request): Response
+    public function add(Request $request): Response
     {
         $form = $this
             ->createForm(CategoryType::class);
+        $form->handleRequest($request);
+
         if ($form->isSubmitted()) {
             $data = $form->getData();
-            $data->setName('name');
-            $request->persist($data);
-            $request->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($data);
+            $em->flush();
         }
 
         return $this->render('form/categoryForm.html.twig', [
             'form' => $form->createView()
         ]);
     }
-
-//    /**
-//     * @Route("/form", name="addCategory")
-//     * @param EntityManagerInterface $entityManager
-//     * @return Response
-//     */
-//    public function add(Request $request): Response
-//    {
-//        // declare a new category
-//        $category = new Category();
-//
-//        // set category properties
-//        $category->setName('name');
-//
-//        // declare object to doctrine (no SQL query is done)
-//        $entityManager->persist($category);
-//
-//        // execute SQL query
-//        // for this object but also all doctrine objects of the script
-//        $entityManager->flush();
-//
-//        return $this->render('form/categoryForm.html.twig', [
-//            'category' => $category,
-//        ]);
-//    }
-
 }
