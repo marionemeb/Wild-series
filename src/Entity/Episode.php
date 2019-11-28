@@ -39,10 +39,10 @@ class Episode
      */
     private $season;
 
-    public function __construct()
-    {
-        $this->season = new ArrayCollection();
-    }
+//    public function __construct()
+//    {
+//        $this->season = new ArrayCollection();
+//    }
 
     public function getId(): ?int
     {
@@ -86,9 +86,9 @@ class Episode
     }
 
     /**
-     * @return Collection|Season[]
+     * @return Season|null
      */
-    public function getSeason(): Season
+    public function getSeason(): ?Season
     {
         return $this->season;
     }
