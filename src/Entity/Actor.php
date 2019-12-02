@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActorRepository")
+ *
  */
 class Actor
 {
@@ -25,6 +26,7 @@ class Actor
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Program", inversedBy="actors")
+     * @ORM\JoinTable(name="actor_program")
      */
     private $programs;
 

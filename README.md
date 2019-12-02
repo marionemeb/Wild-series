@@ -11,3 +11,6 @@ https://www.loom.com/share/f5fcbf1d235a4363b2d7ddc9a03ffd8d
 
 13 - Symfony : Doctrine relations “Many-To-Many” 
 https://www.loom.com/share/fad1ba41dc124ec49079aa3693fb99f8
+
+14 - Symfony : EntityType 
+https://www.loom.com/share/9cc2e2e26f9743f98799e8ca35e0be2c
