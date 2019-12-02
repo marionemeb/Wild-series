@@ -8,20 +8,28 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('app_index') }}">Home <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{{ path('formCategory') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('formCategory') }}">Add Categories</a>
+                    <a class="dropdown-item" href="{{ path('category', { 'categoryName': "horreur" }) }}">Horreur</a>
+                    <a class="dropdown-item" href="{{ path('category', { 'categoryName': "animation" }) }}">Animation</a>
+                    <a class="dropdown-item" href="{{ path('category', { 'categoryName': "drame" }) }}">Drame</a>
+                </div>
+            </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('formCategory') }}">Add Categories<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ path('episode_index') }}">Episodes <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('category') }}">Horreur</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('season_index') }}">Seasons <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('show', { 'slug': "walking-dead" }) }}">Walking Dead</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('program_index') }}">Programs<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('program', { 'program': "walking-dead" }) }}">Program</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('id') }}">Seasons</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('actor_name', { 'name': "Andrew Lincoln" }) }}">Actors<span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>

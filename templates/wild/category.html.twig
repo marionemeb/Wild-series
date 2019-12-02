@@ -3,12 +3,11 @@
 {% block body %}
     <h1> Catégorie : {{ categoryName }}</h1>
     {% for movie in movies %}
+        <br/>
         <div class="media">
-            <img class="align-self-start mr-3" src="{{movie.poster}}" alt="{{ movie.title }} poster">
-            <div class="media-body">
-                <h1 class="mt-0">{{ movie.id }} - {{ movie.title }}</h1>
+            <div class="cat">
+                <h2 class="mt-0">{{ movie.id }} - {{ movie.title }}</h2>
                 <p>{{ movie.summary }}</p>
-                <p>Categorie : {{ movie.category.name }}</p>
             </div>
         </div>
     {% endfor %}

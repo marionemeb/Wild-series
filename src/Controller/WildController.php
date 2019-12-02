@@ -83,7 +83,7 @@ Class WildController extends AbstractController
      * Getting a program with a formatted slug for title
      *
      * @param string $slug The slugger
-     * @Route("/show/{slug<^[a-z0-9-]+$>}", defaults={"slug" = null}, name="show")
+     * @Route("/show/{slug}", defaults={"slug" = null}, name="show")
      * @return Response
      */
     public function show(?string $slug): Response
@@ -92,10 +92,7 @@ Class WildController extends AbstractController
             throw $this
                 ->createNotFoundException('No slug has been sent to find a program in program\'s table.');
         }
-        $slug = preg_replace(
-            '/-/',
-            ' ', ucwords(trim(strip_tags($slug)), "-")
-        );
+
         $program = $this
             ->getDoctrine()
             ->getRepository(Program::class)
@@ -116,7 +113,7 @@ Class WildController extends AbstractController
      * Getting a program with a formatted slug for title
      *
      * @param string $categoryName The slugger
-     * @Route("/showByCategory/{categoryName<^[a-zA-Z0-9-]+$>}", defaults={"categoryName" = "horreur"}, name="category")
+     * @Route("/showByCategory/{categoryName<^[a-zA-Z0-9-]+$>}", defaults={"categoryName" = "null"}, name="category")
      * @return Response
      */
     public function showByCategory(string $categoryName): Response
@@ -153,7 +150,7 @@ Class WildController extends AbstractController
      * Getting a program with a formatted slug for title
      *
      * @param string $program
-     * @Route("/showByProgram/{program<^[a-zA-Z0-9-]+$>}", defaults={"program" = null}, name="program")
+     * @Route("/showByProgram/{program}", defaults={"program" = null}, name="program")
      * @return Response
      */
     public function showByProgram($program)
@@ -162,11 +159,6 @@ Class WildController extends AbstractController
             throw $this
                 ->createNotFoundException('No program has been sent to find a program in program\'s table.');
         }
-
-        $program = preg_replace(
-            '/-/',
-            ' ', ucwords(trim(strip_tags($program)), "-")
-        );
 
         $title = $this
             ->getDoctrine()

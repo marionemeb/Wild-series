@@ -5,10 +5,8 @@
     <h1>Programme {{ title.title }}</h1>
     <ul>
     {% for seasons in season %}
-        <li><a href="">Saison {{ seasons.id }} - Année {{ seasons.year }}</a></li>
+        <li><a href="{{ path('id', { 'id': seasons.id }) }}">Saison {{ seasons.id }} - Année {{ seasons.year }}</a></li>
     {% endfor %}
     </ul>
-    <a href="{{ path('wild_index') }}">
-        Retour à l'accueil
-    </a>
+
 {% endblock %}

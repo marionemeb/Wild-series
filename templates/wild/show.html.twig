@@ -10,23 +10,8 @@
             <h1 class="mt-0">{{ program.title }}</h1>
             <p>{{ program.summary }}</p>
             <p>Categorie : {{ program.category.name }}</p>
+            <p><a class="program_link" href="{{ path('program', { 'program': program.title }) }}">Seasons of {{ program.title }}</a></p>
         </div>
     </div>
-
-    <a href="{{ path('app_index') }}">
-        Retour à l'accueil
-    </a>
-    <br/>
-    <a href="{{ path('show', { 'slug': "walking-dead" }) }}">
-        Testing show() method
-    </a>
-    <br/>
-    <a href="{{ path('program', { 'program': "walking-dead" }) }}">
-        Testing showByProgram()
-    </a>
-    <br>
-    <a href="{{ path('wild_index') }}">
-        Testing index()
-    </a>
 
 {% endblock %}
