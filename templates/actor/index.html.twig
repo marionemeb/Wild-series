@@ -3,7 +3,7 @@
 {% block title %}Acteur{% endblock %}
 
 {% block body %}
-    <strong>Acteur : {{ name.name }}</strong>
+    <strong>Acteur : {{ name }}</strong>
     <ul>
         {% for program in name.programs %}
             <a class="nav-link" href="{{ path('program_show', { 'id': program.id }) }}"><li>{{ program.title }} </li></a>

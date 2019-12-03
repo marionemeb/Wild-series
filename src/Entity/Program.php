@@ -34,7 +34,7 @@ class Program
     private $poster;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="programs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="programs", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;

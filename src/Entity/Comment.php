@@ -28,8 +28,8 @@ class Comment
     private $rate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Episode", inversedBy="comment")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Episode", inversedBy="comment", cascade={"remove"})
+     *
      */
     private $episode;
 

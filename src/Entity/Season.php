@@ -29,7 +29,7 @@ class Season
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="season")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="season", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $program;
