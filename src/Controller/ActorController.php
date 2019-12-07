@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Actor;
 use App\Entity\Program;
+use App\Form\ActorType;
 use App\Repository\ActorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\Slugify;
 
 /**
  * @Route("/actor")
@@ -16,24 +18,99 @@ use Symfony\Component\Routing\Annotation\Route;
 class ActorController extends AbstractController
 {
     /**
-     * @Route("/actor/{name}", name="actor_name", methods={"GET"})
-     * @param $name
+     * @Route("/", name="actor_name", methods={"GET"})
+     * @param ActorRepository $actorRepository
      * @return Response
      */
-    public function index($name): Response
+    public function index(ActorRepository $actorRepository): Response
     {
-        if (!$name) {
-            throw $this
-                ->createNotFoundException('No actor has been sent to find an actor in actor\'s table.');
+        return $this->render('actor/index.html.twig', [
+            'actors' => $actorRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="actor_new")
+     * @param Request $request
+     * @param Slugify $slugify
+     * @return Response
+     */
+    public function new(Request $request, Slugify $slugify): Response
+    {
+        $actor = new Actor();
+
+        $form = $this->createForm(ActorType::class, $actor);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $slug = $slugify->generate($actor->getName());
+            $actor->setSlug($slug);
+            $entityManager->persist($actor);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('actor_name');
         }
 
-        $name = $this
-            ->getDoctrine()
-            ->getRepository(Actor::class)
-            ->findOneBy(['name' => $name]);
-
-        return $this->render('actor/index.html.twig', [
-            'name' => $name,
+        return $this->render('actor/new.html.twig', [
+            'actor' => $actor,
+            'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/{slug}", name="actor_show", methods={"GET"})
+     * @param Actor $actor
+     * @return Response
+     */
+    public function show(Actor $actor): Response
+    {
+        return $this->render('actor/show.html.twig', [
+            'actor' => $actor,
+        ]);
+    }
+
+    /**
+     * @Route("/{slug}/edit", name="actor_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Actor $actor
+     * @param Slugify $slugify
+     * @return Response
+     */
+    public function edit(Request $request, Actor $actor, Slugify $slugify): Response
+    {
+        $slug = $slugify->generate($actor->getName());
+        $actor->setSlug($slug);
+
+        $form = $this->createForm(ActorType::class, $actor);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('actor_name');
+        }
+
+        return $this->render('actor/edit.html.twig', [
+            'actor' => $actor,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="actor_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Actor $actor
+     * @return Response
+     */
+    public function delete(Request $request, Actor $actor): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$actor->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($actor);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('actor_name');
     }
 }
