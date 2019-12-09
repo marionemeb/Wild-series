@@ -4,8 +4,13 @@ $theme-colors: (
         "yellow": #FFF71C,
 );
 
+
 $body-bg: #F7FB8C;
 $body-color: #111;
+
+h1{
+  font-family: Bebas Neue, cursive;
+}
 
 .js-focus-visible{
   $body-bg: #F7FB8C;
