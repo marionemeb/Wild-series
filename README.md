@@ -22,3 +22,4 @@ https://www.loom.com/share/0b7f2b1e76ae490a87381e4c5463b233
 https://www.loom.com/share/e3b0f467ce4849dab686985ebe456902
 
 17 - Symfony : Envoi d’e-mail 
+https://www.loom.com/share/efe8386b35d74005a3b99dbe6cb3ff83
