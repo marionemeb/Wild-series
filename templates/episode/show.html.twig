@@ -29,7 +29,9 @@
         <ul>
             <li><p>Note {{ comment.rate }} : {{ comment.comment }}</p>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <p>{{ include('comment/_delete_form.html.twig') }}</p>
+{#                    {% if is comment.user.id == user.id %}#}
+                        <p>{{ include('comment/_delete_form.html.twig') }}</p>
+{#                    {% endif %}#}
                 {% else %}
                 {% endif %}
             </li>
