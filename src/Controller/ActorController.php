@@ -6,6 +6,7 @@ use App\Entity\Actor;
 use App\Entity\Program;
 use App\Form\ActorType;
 use App\Repository\ActorRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +35,7 @@ class ActorController extends AbstractController
      * @param Request $request
      * @param Slugify $slugify
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request, Slugify $slugify): Response
     {
@@ -76,6 +78,7 @@ class ActorController extends AbstractController
      * @param Actor $actor
      * @param Slugify $slugify
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Actor $actor, Slugify $slugify): Response
     {
@@ -102,6 +105,7 @@ class ActorController extends AbstractController
      * @param Request $request
      * @param Actor $actor
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Actor $actor): Response
     {

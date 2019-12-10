@@ -9,6 +9,7 @@ use App\Form\EpisodeType;
 use App\Repository\CommentRepository;
 use App\Repository\EpisodeRepository;
 use App\Service\Slugify;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,6 +38,7 @@ class EpisodeController extends AbstractController
      * @param Request $request
      * @param Slugify $slugify
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request, Slugify $slugify): Response
     {
@@ -81,6 +83,12 @@ class EpisodeController extends AbstractController
             $entityManager->flush();
         }
 
+//        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $entityManager->remove($comment);
+//            $entityManager->flush();
+//        }
+
         return $this->render('episode/show.html.twig', [
             'episode' => $episode,
             'form' => $form->createView(),
@@ -93,6 +101,7 @@ class EpisodeController extends AbstractController
      * @param Episode $episode
      * @param Slugify $slugify
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Episode $episode, Slugify $slugify): Response
     {
@@ -119,6 +128,7 @@ class EpisodeController extends AbstractController
      * @param Request $request
      * @param Episode $episode
      * @return Response
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Episode $episode): Response
     {

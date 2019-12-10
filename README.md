@@ -26,3 +26,6 @@ https://www.loom.com/share/efe8386b35d74005a3b99dbe6cb3ff83
 
 18 - Symfony : Gestion des utilisateurs 
 https://www.loom.com/share/7323389ffdc44eb399ffdd305f2868cd
+
+19 - Symfony : Sécurisons nos routes.
+https://www.loom.com/share/9b8b1b0cda054489b2032ba5466ef465

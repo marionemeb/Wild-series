@@ -18,10 +18,25 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        // Création d’un utilisateur de type “suscriber”
+        $subscriber = new User();
+        $subscriber->setEmail('subscriber@monsite.com');
+        $subscriber->setRoles(['ROLE_SUBSCRIBER']);
+        $subscriber->setUsername('subscriber');
+        $subscriber->setBio('I am the subscriber');
+        $subscriber->setPassword($this->passwordEncoder->encodePassword(
+            $subscriber,
+            'suscriber'
+        ));
+
+        $manager->persist($subscriber);
+
         // Création d’un utilisateur de type “auteur”
         $subscriberauthor = new User();
         $subscriberauthor->setEmail('subscriberauthor@monsite.com');
-        $subscriberauthor->setRoles(['autheur']);
+        $subscriberauthor->setRoles(['ROLE_SUBSCRIBER']);
+        $subscriberauthor->setUsername('autheur');
+        $subscriberauthor->setBio('I am the autheur');
         $subscriberauthor->setPassword($this->passwordEncoder->encodePassword(
             $subscriberauthor,
             'autheur'
@@ -32,7 +47,9 @@ class UserFixtures extends Fixture
         // Création d’un utilisateur de type “administrateur”
         $admin = new User();
         $admin->setEmail('admin@monsite.com');
-        $admin->setRoles(['admin']);
+        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setUsername('admin');
+        $admin->setBio('I am the admin');
         $admin->setPassword($this->passwordEncoder->encodePassword(
             $admin,
             'admin'
@@ -40,7 +57,7 @@ class UserFixtures extends Fixture
 
         $manager->persist($admin);
 
-        // Sauvegarde des 2 nouveaux utilisateurs :
+        // Sauvegarde des 3 nouveaux utilisateurs :
         $manager->flush();
     }
 }

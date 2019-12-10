@@ -22,7 +22,10 @@
                 <td>{{ season.description }}</td>
                 <td>
                     <a href="{{ path('season_show', {'year': season.year}) }}">show</a>
-                    <a href="{{ path('season_edit', {'year': season.year}) }}">edit</a>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('season_edit', {'year': season.year}) }}">Éditer</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -32,6 +35,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('season_new') }}">Create new</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('season_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

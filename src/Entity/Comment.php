@@ -35,6 +35,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     *
      */
     private $user;
 
