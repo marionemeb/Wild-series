@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ path('wild_index') }}">Wild Series</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -9,28 +10,40 @@
                 <a class="nav-link" href="{{ path('app_index') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{{ path('formCategory') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="{{ path('formCategory') }}" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Categories
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ path('formCategory') }}">Add Categories</a>
                     <a class="dropdown-item" href="{{ path('category', { 'categoryName': "horreur" }) }}">Horreur</a>
-                    <a class="dropdown-item" href="{{ path('category', { 'categoryName': "animation" }) }}">Animation</a>
+                    <a class="dropdown-item"
+                       href="{{ path('category', { 'categoryName': "animation" }) }}">Animation</a>
                     <a class="dropdown-item" href="{{ path('category', { 'categoryName': "drame" }) }}">Drame</a>
                 </div>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('episode_index') }}">Episodes <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ path('episode_index') }}">Episodes <span
+                            class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('season_index') }}">Seasons <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('program_index') }}">Programs<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ path('program_index') }}">Programs<span
+                            class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('actor_name') }}">Actors<span class="sr-only">(current)</span></a>
             </li>
         </ul>
+        <div class="log">
+            {% if app.user %}
+                {{ app.user.email }}
+                <a href="{{ path('app_logout') }}" role="button"> Se déconnecter</a>
+            {% else %}
+                <a href="{{ path('app_login') }}" role="button"> Se connecter</a>
+            {% endif %}
+        </div>
     </div>
 </nav>
