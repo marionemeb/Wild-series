@@ -29,3 +29,6 @@ https://www.loom.com/share/7323389ffdc44eb399ffdd305f2868cd
 
 19 - Symfony : Sécurisons nos routes.
 https://www.loom.com/share/9b8b1b0cda054489b2032ba5466ef465
+
+20 - Inscription d’un utilisateur 
+https://www.loom.com/share/feb3c42d900e4c7087b6cec9e23b4cc8

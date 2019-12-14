@@ -122,6 +122,9 @@ class ProgramController extends AbstractController
     /**
      * @Route("/{id}", name="program_delete", methods={"DELETE"})
      * @IsGranted("ROLE_ADMIN")
+     * @param Request $request
+     * @param Program $program
+     * @return Response
      */
     public function delete(Request $request, Program $program): Response
     {
