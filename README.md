@@ -32,3 +32,6 @@ https://www.loom.com/share/9b8b1b0cda054489b2032ba5466ef465
 
 20 - Inscription d’un utilisateur 
 https://www.loom.com/share/feb3c42d900e4c7087b6cec9e23b4cc8
+
+21 - Validation 
+https://www.loom.com/share/bccd209039894c5e8848f581cced6d5c
