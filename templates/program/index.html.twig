@@ -12,16 +12,25 @@
                 <th>Title</th>
                 <th>Summary</th>
                 <th>Poster</th>
+                <th>Actors</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for program in programs %}
+
             <tr>
                 <td>{{ program.id }}</td>
                 <td>{{ program.title }}</td>
                 <td>{{ program.summary }}</td>
                 <td>{{ program.poster }}</td>
+                <td>
+                <ul>
+                {% for actor in program.actors %}
+                <li>{{ actor.name }}</li>
+                {% endfor %}
+                </ul>
+                </td>
                 <td>
                     <a href="{{ path('program_show', {'slug': program.slug}) }}">show</a>
 
